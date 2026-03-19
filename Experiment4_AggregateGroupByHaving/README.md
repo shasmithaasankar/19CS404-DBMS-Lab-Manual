@@ -38,123 +38,205 @@ HAVING condition;
 
 **Question 1**
 --
--- Paste Question 1 here
+-- Write a SQL query to find Who has the highest income among employee living in California?
+
+Table: employee
 
 ```sql
--- Paste your SQL code below for Question 1
+SELECT name, MAX(income) AS "max(income)"
+FROM employee
+WHERE city = 'California'
+GROUP BY name
+HAVING MAX(income) = (
+    SELECT MAX(income)
+    FROM employee
+    WHERE city = 'California'
+);
+
 ```
 
 **Output:**
 
-![Output1](output.png)
+<img width="891" height="426" alt="image" src="https://github.com/user-attachments/assets/491c99e6-d1c5-44d1-912a-eea44474242d" />
+
 
 **Question 2**
 ---
--- Paste Question 2 here
+-- Write a SQL query to calculate total purchase amount of all orders. Return total purchase amount.
+
+Sample table: orders
 
 ```sql
--- Paste your SQL code below for Question 2
+SELECT SUM(purch_amt) AS TOTAL
+FROM orders;
+
 ```
 
 **Output:**
 
-![Output2](output.png)
+<img width="621" height="410" alt="image" src="https://github.com/user-attachments/assets/4fcabd22-bce2-41a7-8133-bee66f54fc00" />
+
 
 **Question 3**
 ---
--- Paste Question 3 here
+-- Write a SQL query to find the minimum purchase amount.
+
+Sample table: orders
 
 ```sql
--- Paste your SQL code below for Question 3
+SELECT MIN(purch_amt) AS MINIMUM
+FROM orders;
+
 ```
 
 **Output:**
 
-![Output3](output.png)
+<img width="770" height="387" alt="image" src="https://github.com/user-attachments/assets/0ca9b109-9b28-4ba0-9e15-2071b56248f9" />
+
 
 **Question 4**
 ---
--- Paste Question 4 here
+-- How many male and female doctors are there in each medical specialty?
+
+Sample table:Doctors Table
 
 ```sql
--- Paste your SQL code below for Question 4
+SELECT 
+    Specialty,
+    Gender,
+    COUNT(*) AS TotalDoctors
+FROM Doctors
+GROUP BY Specialty, Gender
+ORDER BY Specialty, Gender;
+
 ```
 
 **Output:**
 
-![Output4](output.png)
+<img width="1350" height="737" alt="image" src="https://github.com/user-attachments/assets/0c489da0-5513-498f-aa46-d8d1431c84db" />
+
 
 **Question 5**
 ---
--- Paste Question 5 here
+--What is the most common diagnosis among patients?
+
+Sample table:MedicalRecords Table
 
 ```sql
--- Paste your SQL code below for Question 5
+SELECT Diagnosis, COUNT(*) AS DiagnosisCount
+FROM MedicalRecords
+GROUP BY Diagnosis
+ORDER BY COUNT(*) DESC
+LIMIT 1;
+
 ```
 
 **Output:**
 
-![Output5](output.png)
+<img width="1068" height="439" alt="image" src="https://github.com/user-attachments/assets/66441429-fd6b-4477-9eca-df4562cc7aa4" />
+
 
 **Question 6**
 ---
--- Paste Question 6 here
+-- Write SQL query to extract the email domain from each patient's email address and count the number of patients with the same email domain.
+
+Sample table: Patients Table
 
 ```sql
--- Paste your SQL code below for Question 6
+SELECT 
+    SUBSTR(email, INSTR(email, '@') + 1) AS EmailDomain,
+    COUNT(*) AS TotalPatients
+FROM Patients
+GROUP BY SUBSTR(email, INSTR(email, '@') + 1);
+
 ```
 
 **Output:**
 
-![Output6](output.png)
+<img width="903" height="488" alt="image" src="https://github.com/user-attachments/assets/2f8cfaa2-b260-4b7b-900c-7c67a1d972d8" />
+
 
 **Question 7**
 ---
--- Paste Question 7 here
+--Write the SQL query that accomplishes the selection of product which has lowest price in each category from the "products" table and includes only those products where the minimum price is less than 10.
+
+Sample table: products
 
 ```sql
--- Paste your SQL code below for Question 7
+SELECT category_id, MIN(price) AS Price
+FROM products
+GROUP BY category_id
+HAVING MIN(price) < 10;
+
 ```
 
 **Output:**
 
-![Output7](output.png)
+<img width="964" height="466" alt="image" src="https://github.com/user-attachments/assets/f89e30cc-6989-43d7-91a8-3b9d20723b03" />
+
 
 **Question 8**
 ---
--- Paste Question 8 here
+--Which cities (addresses) in the "customer1" table have an average salary lesser than Rs. 15000
 
+Sample table: customer1
 ```sql
--- Paste your SQL code below for Question 8
+SELECT address, AVG(salary) AS "AVG(salary)"
+FROM customer1
+GROUP BY address
+HAVING AVG(salary) < 15000;
+
 ```
 
 **Output:**
 
-![Output8](output.png)
+<img width="879" height="715" alt="image" src="https://github.com/user-attachments/assets/3bb7eed7-51ae-4ad4-8c02-946441cb5938" />
 
 **Question 9**
 ---
--- Paste Question 9 here
+-- Write the SQL query that achieves the grouping of data by city, calculates the average income for each city, and includes only those cities where the average income is greater than 500,000.
+
+Sample table: employee
 
 ```sql
--- Paste your SQL code below for Question 9
+SELECT city, AVG(income) AS "AVG(income)"
+FROM employee
+GROUP BY city
+HAVING AVG(income) > 500000;
+
 ```
 
 **Output:**
 
-![Output9](output.png)
+<img width="1002" height="553" alt="image" src="https://github.com/user-attachments/assets/a1140b0e-9629-4558-b01a-6c20c9727525" />
+
 
 **Question 10**
 ---
--- Paste Question 10 here
+-- Write the SQL query that performs grouping by age groups and displays the maximum salary for each group, excluding groups where the maximum salary is not greater than 8000. 
+
+Note: Calculate the age group as multiples of 5.
+
+Eg., 20,22,23 comes in age group 20. 
+
+25,27,29 comes in age group 25.
+
+Sample table: customer1
 
 ```sql
--- Paste your SQL code below for Question 10
+SELECT 
+    (age / 5) * 5 AS age_group,
+    MAX(salary) AS "MAX(salary)"
+FROM customer1
+GROUP BY (age / 5) * 5
+HAVING MAX(salary) > 8000;
+
 ```
 
 **Output:**
 
-![Output10](output.png)
+<img width="933" height="457" alt="image" src="https://github.com/user-attachments/assets/9dd477ff-2178-40fb-b888-74256dab34fe" />
+
 
 
 ## RESULT
