@@ -38,123 +38,197 @@ DROP VIEW view_name;
 
 **Question 1**
 --
--- Paste Question 1 here
+-- Write a SQL query that retrieves the names of students and their corresponding grades, where the grade is equal to the minimum grade achieved in each subject.
 
+Sample table: GRADES
 ```sql
--- Paste your SQL code below for Question 1
+SELECT g.student_name, g.grade
+FROM GRADES g
+WHERE g.grade = (
+    SELECT MIN(g2.grade)
+    FROM GRADES g2
+    WHERE g2.subject = g.subject
+);
+
 ```
 
 **Output:**
 
-![Output1](output.png)
+<img width="961" height="522" alt="image" src="https://github.com/user-attachments/assets/5281894d-b16a-4d82-995f-03d8e4f40532" />
+
 
 **Question 2**
 ---
--- Paste Question 2 here
-
+--From the following tables, write a SQL query to determine the commission of the salespeople in Paris. Return commission.
 ```sql
--- Paste your SQL code below for Question 2
+SELECT DISTINCT commission
+FROM salesman
+WHERE city = 'Paris';
+
 ```
 
 **Output:**
 
-![Output2](output.png)
+<img width="624" height="420" alt="image" src="https://github.com/user-attachments/assets/c434a1fe-ebf5-44f8-bcd2-3af47241c962" />
+
 
 **Question 3**
 ---
--- Paste Question 3 here
+-- Write a SQL query to retrieve all columns from the CUSTOMERS table for customers whose salary is greater than $4500.
+
+Sample table: CUSTOMERS
 
 ```sql
--- Paste your SQL code below for Question 3
+SELECT *
+FROM CUSTOMERS
+WHERE SALARY > 4500;
+
 ```
 
 **Output:**
 
-![Output3](output.png)
+<img width="1281" height="544" alt="image" src="https://github.com/user-attachments/assets/7bd9eb98-fcb2-43c0-b20b-effa0c7fc1ca" />
+
 
 **Question 4**
 ---
--- Paste Question 4 here
+-- Write a SQL query to retrieve all columns from the CUSTOMERS table for customers whose Address as Delhi
+
+Sample table: CUSTOMERS
 
 ```sql
--- Paste your SQL code below for Question 4
+SELECT *
+FROM CUSTOMERS
+WHERE ADDRESS = 'Delhi';
+
 ```
 
 **Output:**
 
-![Output4](output.png)
+<img width="1250" height="452" alt="image" src="https://github.com/user-attachments/assets/a67ee3cc-d759-4f95-8272-d702e84fc268" />
+
 
 **Question 5**
 ---
--- Paste Question 5 here
+-- Write a SQL query to List departments with names longer than the average length
 
 ```sql
--- Paste your SQL code below for Question 5
+SELECT department_id, department_name
+FROM Departments
+WHERE LENGTH(department_name) > (
+    SELECT AVG(LENGTH(department_name))
+    FROM Departments
+);
+
 ```
 
 **Output:**
 
-![Output5](output.png)
+<img width="909" height="506" alt="image" src="https://github.com/user-attachments/assets/ed28178a-0318-439a-9247-9d78d9134f69" />
+
 
 **Question 6**
 ---
--- Paste Question 6 here
+-- Write a SQL query to Identify customers whose city is different from the city of the customer with the highest ID
+
+SAMPLE TABLE: customer
 
 ```sql
--- Paste your SQL code below for Question 6
+SELECT *
+FROM customer
+WHERE city != (
+    SELECT city
+    FROM customer
+    ORDER BY id DESC
+    LIMIT 1
+);
+
 ```
 
 **Output:**
 
-![Output6](output.png)
+<img width="1258" height="612" alt="image" src="https://github.com/user-attachments/assets/3647af8c-d929-40a0-85f5-21b4446ccc9f" />
+
+
 
 **Question 7**
 ---
--- Paste Question 7 here
+-- Write a SQL query to Retrieve the names and cities of customers who have the same city as customers with IDs 3 and 7
+
+SAMPLE TABLE: customer
 
 ```sql
--- Paste your SQL code below for Question 7
+SELECT name, city
+FROM customer
+WHERE city IN (
+    SELECT city
+    FROM customer
+    WHERE id IN (3, 7)
+);
+
 ```
 
 **Output:**
 
-![Output7](output.png)
+<img width="927" height="548" alt="image" src="https://github.com/user-attachments/assets/4f74c555-0bfc-4131-a194-71bb9de3a8dc" />
+
 
 **Question 8**
 ---
--- Paste Question 8 here
+-- Write a SQL query to Retrieve the medications with dosages equal to the highest dosage
+
+Medications Table
 
 ```sql
--- Paste your SQL code below for Question 8
+SELECT *
+FROM Medications
+WHERE dosage = (
+    SELECT MAX(dosage)
+    FROM Medications
+);
+
 ```
 
 **Output:**
 
-![Output8](output.png)
+<img width="1126" height="529" alt="image" src="https://github.com/user-attachments/assets/d719a2c8-6653-471b-b212-1bca75cdeac9" />
+
 
 **Question 9**
 ---
--- Paste Question 9 here
+-- Write a SQL query to retrieve all columns from the CUSTOMERS table for customers whose salary is LESS than $2500.
+
+Sample table: CUSTOMERS
 
 ```sql
--- Paste your SQL code below for Question 9
+SELECT *
+FROM CUSTOMERS
+WHERE SALARY < 2500;
+
 ```
 
 **Output:**
 
-![Output9](output.png)
+<img width="1285" height="559" alt="image" src="https://github.com/user-attachments/assets/9d15bc03-b7c5-480e-96aa-fb65da563fb7" />
+
 
 **Question 10**
 ---
--- Paste Question 10 here
+-- Write a SQL query to retrieve all columns from the CUSTOMERS table for customers whose salary is greater than $1500.
+
+Sample table: CUSTOMERS
 
 ```sql
--- Paste your SQL code below for Question 10
+SELECT *
+FROM CUSTOMERS
+WHERE SALARY > 1500;
+
 ```
 
 **Output:**
 
-![Output10](output.png)
+<img width="1261" height="721" alt="image" src="https://github.com/user-attachments/assets/581ce1b2-7370-4022-b03a-f92da1b6a1a7" />
+
 
 
 ## RESULT
